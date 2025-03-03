@@ -1,13 +1,12 @@
 package com.spring.messaging.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.SpringApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.spring.messaging.annotation.Log;
 
-
-
+@Slf4j
 @Component
 public class RestAppEventListener {
 
@@ -16,8 +15,7 @@ public class RestAppEventListener {
 	//@Order(Ordered.HIGHEST_PRECEDENCE)
 	//@Async
 	@EventListener
-	@Log(printParamsValues=true)	// to intercept in AOP audit classes
 	public void restAppHandler(SpringApplicationEvent springApp){
-//		System.out.println("------------------------ :" + springApp.getClass()); to print here the event result
+		log.info("------------------------ : {}", springApp.getClass()); // to print here the event result
 	}
 }

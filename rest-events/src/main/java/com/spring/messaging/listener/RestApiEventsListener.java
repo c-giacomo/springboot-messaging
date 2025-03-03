@@ -1,28 +1,29 @@
 package com.spring.messaging.listener;
 
 import com.spring.messaging.service.CounterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.ServletRequestHandledEvent;
 
-import com.spring.messaging.annotation.Log;
-
+@Slf4j
 @Component
-public class RestApiEventsListener implements ApplicationListener<ApplicationEvent>{
+@RequiredArgsConstructor
+public class RestApiEventsListener implements ApplicationListener<ApplicationEvent> {
 	
-	private static final String LATEST = "/currency/latest";
-	
-	@Autowired
-	private CounterService counterService;
-	
-	@Log(printParamsValues=true)
-	public void onApplicationEvent(ApplicationEvent event) {
-		if(event instanceof ServletRequestHandledEvent){
-			if(((ServletRequestHandledEvent)event).getRequestUrl().equals(LATEST)){
-				counterService.increment();
-			}
+	private static final String USERS = "/REST-EVENT/dealership/users";
+	private static final String CARS = "/REST-EVENT/dealership/cars";
+
+	private final CounterService counterService;
+
+	public void onApplicationEvent(@NonNull ApplicationEvent event) {
+		if (((ServletRequestHandledEvent)event).getRequestUrl().equals(USERS)) {
+			counterService.userIncrement();
+		} else if (((ServletRequestHandledEvent)event).getRequestUrl().equals(CARS)) {
+			counterService.carsIncrement();
 		}
 	}
 }

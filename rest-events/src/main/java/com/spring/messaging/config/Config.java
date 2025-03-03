@@ -15,7 +15,12 @@ public class Config {
      */
 
     @Bean
-    MeterRegistryCustomizer<MeterRegistry> hitLatestEndpoint() {
-        return registry -> registry.config().namingConvention().name("url.currency.latest.hits", Meter.Type.COUNTER);
+    MeterRegistryCustomizer<MeterRegistry> getUsersCount() {
+        return registry -> registry.config().namingConvention().name("url.users.hits", Meter.Type.COUNTER);
+    }
+
+    @Bean
+    MeterRegistryCustomizer<MeterRegistry> getCarsCount() {
+        return registry -> registry.config().namingConvention().name("url.cars.hits", Meter.Type.COUNTER);
     }
 }

@@ -6,13 +6,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CounterService {
-    private final Counter latestHitCounter;
+    private final Counter usersHitCounter;
+    private final Counter carsHitCounter;
 
     public CounterService(MeterRegistry registry) {
-        this.latestHitCounter = registry.counter("url.currency.latest.hits");
+        this.usersHitCounter = registry.counter("url.users.hits");
+        this.carsHitCounter = registry.counter("url.cars.hits");
     }
 
-    public void increment() {
-        this.latestHitCounter.increment();
+    public void userIncrement() {
+        this.usersHitCounter.increment();
     }
+    public void carsIncrement() { this.carsHitCounter.increment(); }
 }

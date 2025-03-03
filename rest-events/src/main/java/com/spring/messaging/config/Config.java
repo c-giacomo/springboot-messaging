@@ -11,7 +11,8 @@ public class Config {
 
     /*
         call the metrics at /actuator/metrics
-        call the registered metric at /actuator/metrics/url.currency.latest.hits
+        call the registered metric at /actuator/metrics/url.users.hits
+        call the registered metric at /actuator/metrics/url.cars.hits
      */
 
     @Bean
